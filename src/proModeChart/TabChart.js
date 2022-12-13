@@ -9,14 +9,14 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import AttributeComprision from './AttributeComprision';
 import AttributeTradeOff from './AttributeTradeOff';
-import { useState } from "react";
-import { getGraphData } from "./config";
-import {graphData} from './graphData.js';
+import useProModeData from "./useProModeData";
+import dataStore from './dataStore.json';
+// import TabsContainer from "../../../Components/TabsComponent/TabsContainer";
 
 export const TabChart = () => {
+  // getting data from graphData.json and passing it to useProModeData costume hook to get graphData
+  const [data] = useProModeData(dataStore.graphData);
 
-  // const data = [[0.505, 1175], [0.524, 1108], [0.525, 1110], [0.550, 1030]]
-  const [data, setData] = useState(graphData)
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -24,14 +24,10 @@ export const TabChart = () => {
     setValue(newValue);
   }
 
-  //Firing getData function to call getGraphData.
-  const getData = ()=>{
-    return getGraphData(data);
-  }
-
   return (
     <div className={classes.customRoot}>
       <AppBar position="static" className={classes.apppTab} >
+        {/* <TabsContainer /> */}
         <Tabs
           className={classes.customTabs}
           value={value}
@@ -48,7 +44,6 @@ export const TabChart = () => {
       </AppBar>
       <TabPanel value={value} index={0}>
          <ProModeChart data={data} />
-         {/* <ProModeChart data={getData()} /> */}
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AttributeTradeOff />
