@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import ReactEChart from "echarts-for-react";
 
-//current data format [[0.505, 1175], [0.524, 1108], [0.525, 1110], [0.550, 1030]]
 const ProModeChart=({data})=> {
-
   const getColor = (dataValue)=>{
 
     // colors can be given dynamically or conditionally once the API data is ready...
